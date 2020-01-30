@@ -23,12 +23,18 @@ class Entity(models.Model):
     DIVISION = 'DIV'
     DEPARTMENT ='DEP'
     BRANCH = 'BRA'
+    N_A = 'N/A'
+    LAB = 'LAB'
+    HEAD = 'HEAD'
 
     TYPE_CHOICES = [
         (SECTION, 'Section'),
         (DIVISION, 'Division'),
         (DEPARTMENT, 'Department'),
         (BRANCH, 'Branch'),
+        (N_A, 'N/A'),
+        (LAB, 'Lab'),
+        (HEAD, 'Head Office')
     ]
 
     entity_name = models.CharField('Entity Name',max_length=100)

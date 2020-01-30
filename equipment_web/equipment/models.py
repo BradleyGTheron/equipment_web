@@ -30,7 +30,7 @@ class Equipment(models.Model):
         (SEQUENCING, 'Sequencing'),
         (MOLECULAR, 'Molecular'),
     ]
-    image = models.ImageField(upload_to='images/',null=True)
+    image = models.ImageField(upload_to='images/',null=True,blank=True)
     manufacturer = models.ForeignKey(Manufacturer,on_delete=models.CASCADE,default=0)
     supplier = models.ForeignKey(Supplier,on_delete=models.CASCADE,default=0)
     product_name = models.CharField('Name', max_length=100)
@@ -41,6 +41,7 @@ class Equipment(models.Model):
     require_calibration = models.BooleanField('Calibration Required',default=False)
     calibration_period = models.PositiveIntegerField('Calibration Period (months)',default=0,
                                                     help_text='Leave set to 0 if the equipment does not require calibration')
+    calibration_notes = models.TextField('Calibration Notes', blank=True, null=True)
     category = models.CharField('Category', max_length=4,choices=CATEGORY_CHOICES, default=CENTRIFUGE)
     #image = models.ImageField('Image',upload_to='model_images',null=True,blank=True)
     is_active = models.BooleanField('Is Active',default=True)
@@ -53,4 +54,5 @@ class Equipment(models.Model):
         verbose_name_plural = 'Products'
 
     def __str__(self):
-        return '{} - {}'.format(self.manufacturer, self.product_name)
+        # return '{} - {}'.format(self.manufacturer, self.product_name)
+        return self.product_name
