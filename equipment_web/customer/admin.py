@@ -1,11 +1,18 @@
 from django.contrib import admin
 from . models import Account, Entity, Address
+from instrument.models import Instrument
 from django_admin_listfilter_dropdown.filters import RelatedDropdownFilter
 
 class EntityInLine(admin.TabularInline):
     model = Entity
     fields = ('entity_name','entity_abbreviation','entity_type','is_active')
     #readonly_fields = ('entity_name','entity_abbreviation','entity_type',)
+    show_change_link = True
+    extra = 0
+
+class InstrumentInLine(admin.TabularInline):
+    model = Instrument
+    fields = ('serial_number','equipment','is_active')
     show_change_link = True
     extra = 0
 
@@ -23,6 +30,7 @@ class EntityAdmin(admin.ModelAdmin):
     list_filter = (
         ('account', RelatedDropdownFilter),
     )
+    inlines = (InstrumentInLine,)
     list_per_page = 15
 
 class AddressAdmin(admin.ModelAdmin):
